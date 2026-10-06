@@ -1,0 +1,244 @@
+:root {
+  --paper-bg: #FBF9F4;
+  --paper-card: #FFFFFF;
+  --paper-card-alt: #F4EFE6;
+  --ink-primary: #121212;
+  --ink-muted: #4A4D52;
+  --ink-faded: #7A7E85;
+  --border-ink: #121212;
+  --border-paper: #DCD6C9;
+  
+  --shadow-eink: 3px 3px 0px #121212;
+  --shadow-subtle: 2px 2px 0px #DCD6C9;
+
+  --accent-stamp: #8A2518;
+  --accent-stamp-bg: rgba(138, 37, 24, 0.08);
+  --accent-forest: #1A5436;
+  --accent-forest-bg: rgba(26, 84, 54, 0.08);
+  --accent-amber: #B85B00;
+  --accent-amber-bg: rgba(184, 91, 0, 0.08);
+
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-editorial: 'Newsreader', Georgia, serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+[data-theme='dark'] {
+  --paper-bg: #121418;
+  --paper-card: #1A1D23;
+  --paper-card-alt: #232730;
+  --ink-primary: #F7F5F0;
+  --ink-muted: #B4AFA6;
+  --ink-faded: #7C786F;
+  --border-ink: #F7F5F0;
+  --border-paper: #343842;
+  
+  --shadow-eink: 3px 3px 0px #F7F5F0;
+  --shadow-subtle: 2px 2px 0px #343842;
+
+  --accent-stamp: #FF6F59;
+  --accent-stamp-bg: rgba(255, 111, 89, 0.15);
+  --accent-forest: #4ADE80;
+  --accent-forest-bg: rgba(74, 222, 128, 0.15);
+  --accent-amber: #FBBF24;
+  --accent-amber-bg: rgba(251, 191, 36, 0.15);
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--paper-bg);
+  color: var(--ink-primary);
+  font-family: var(--font-editorial);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 8px 8px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-primary);
+  word-wrap: break-word;
+}
+
+button {
+  font-family: var(--font-mono);
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  touch-action: manipulation;
+}
+
+/* E-Ink Editorial Card Containers */
+.eink-card {
+  background: var(--paper-card);
+  border: 2px solid var(--border-ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-eink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.eink-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--border-ink);
+}
+
+.eink-card-subtle {
+  background: var(--paper-card-alt);
+  border: 1px solid var(--border-paper);
+  border-radius: var(--radius-sm);
+}
+
+.eink-pill {
+  font-family: var(--font-mono);
+  background: var(--paper-card);
+  border: 1.5px solid var(--border-ink);
+  border-radius: 4px;
+  box-shadow: var(--shadow-subtle);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-primary);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.eink-pill:hover {
+  background: var(--ink-primary);
+  color: var(--paper-card);
+}
+
+/* Editorial Newspaper Masthead */
+.editorial-masthead {
+  border-bottom: 3px double var(--border-ink);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.masthead-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--border-ink);
+  border-bottom: 1px solid var(--border-ink);
+  padding: 6px 4px;
+  margin: 10px 0 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* E-Ink Badges & Ink Stamps */
+.badge-eink {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 7px;
+  border: 1px solid var(--border-ink);
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.badge-forest {
+  background: var(--accent-forest-bg);
+  color: var(--accent-forest);
+  border-color: var(--accent-forest);
+}
+
+.badge-amber {
+  background: var(--accent-amber-bg);
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+.badge-stamp {
+  background: var(--accent-stamp-bg);
+  color: var(--accent-stamp);
+  border-color: var(--accent-stamp);
+}
+
+/* Progress bar for E-Ink */
+.eink-progress-bg {
+  width: 100%;
+  height: 10px;
+  background: var(--paper-card-alt);
+  border: 1.5px solid var(--border-ink);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.eink-progress-fill {
+  height: 100%;
+  background: var(--ink-primary);
+  transition: width 0.4s ease;
+}
+
+/* App Container */
+.app-container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 16px 50px 16px;
+  box-sizing: border-box;
+}
+
+/* Responsive Mobile Layout Adjustments */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 12px 10px 30px 10px;
+  }
+
+  .masthead-tagline {
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+    font-size: 0.65rem;
+    padding: 6px 2px;
+  }
+
+  .eink-card {
+    padding: 16px 14px !important;
+  }
+
+  .eink-pill {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
