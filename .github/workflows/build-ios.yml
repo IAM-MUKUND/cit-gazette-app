@@ -29,7 +29,7 @@ jobs:
       - name: Sync Capacitor Native Project
         run: npx cap sync ios
 
-      - name: Build iOS App Binary (No Mac Needed Locally)
+      - name: Build iOS App Binary (xcodebuild)
         run: |
           xcodebuild -workspace ios/App/App.xcworkspace \
                      -scheme App \
@@ -40,12 +40,15 @@ jobs:
                      CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_ALLOWED=NO
 
-      - name: Compress Built App for Download
+      - name: Create Native IPA Bundle for Sideloadly / AltStore
         run: |
           cd build/Build/Products/Release-iphoneos
-          zip -r CIT_Gazette_iOS_App.zip App.app
+          mkdir Payload
+          cp -r App.app Payload/
+          zip -r CIT_Gazette.ipa Payload
+          zip -r CIT_Gazette_iOS_App.zip App.app CIT_Gazette.ipa
 
-      - name: Upload iOS App Artifact
+      - name: Upload iOS App & IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: CIT-Gazette-iOS-App
