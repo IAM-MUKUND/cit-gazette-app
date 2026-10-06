@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Timetable from './components/Timetable';
 import Attendance from './components/Attendance';
 import TokenModal from './components/TokenModal';
+import { getAttendance } from './services/api';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('timetable');
@@ -12,7 +13,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-  const [theme, setTheme] = useState('paper'); // 'paper' or 'dark'
+  const [theme, setTheme] = useState('paper');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -30,20 +31,14 @@ export default function App() {
           setCustomToken(data.token);
         }
       })
-      .catch(err => console.warn('Could not fetch server default token:', err));
+      .catch(err => console.warn('Using client token defaults:', err));
   }, []);
 
   const fetchAttendance = async () => {
     setLoading(true);
     setError(null);
     try {
-      const headers = {};
-      if (customToken) {
-        headers['x-api-token'] = customToken;
-      }
-
-      const res = await fetch('/api/attendance', { headers });
-      const json = await res.json();
+      const json = await getAttendance(customToken);
 
       if (json && json.data) {
         setAttendanceList(json.data);
@@ -61,7 +56,7 @@ export default function App() {
       }
     } catch (err) {
       console.error('Error fetching attendance:', err);
-      setError('Could not load attendance percentage dataset.');
+      setError('Could not load attendance dataset.');
     } finally {
       setLoading(false);
     }

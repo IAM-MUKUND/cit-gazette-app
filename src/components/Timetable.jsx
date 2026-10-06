@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Clock, MapPin, User, BookOpen, Sparkles, ArrowRight, CheckCircle2, FileText, AlertCircle } from 'lucide-react';
+import { getTimetable } from '../services/api';
 
 const PERIOD_TIMES = {
   1: { start: '08:45', end: '09:40', label: '08:45 - 09:40 AM' },
@@ -43,16 +44,9 @@ export default function Timetable({ attendanceMap, customToken }) {
     setLoading(true);
     setError(null);
 
-    const fetchTimetable = async () => {
+    const fetchSchedule = async () => {
       try {
-        const headers = {};
-        if (customToken) {
-          headers['x-api-token'] = customToken;
-        }
-
-        const res = await fetch(`/api/timetable?date=${selectedDate}`, { headers });
-        const json = await res.json();
-
+        const json = await getTimetable(selectedDate, customToken);
         if (isMounted) {
           if (json && json.data) {
             setTimetableData(json.data);
@@ -70,7 +64,7 @@ export default function Timetable({ attendanceMap, customToken }) {
       }
     };
 
-    fetchTimetable();
+    fetchSchedule();
     return () => { isMounted = false; };
   }, [selectedDate, customToken]);
 
