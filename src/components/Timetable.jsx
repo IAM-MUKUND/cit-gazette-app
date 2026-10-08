@@ -3,13 +3,13 @@ import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Clock, MapPin, Use
 import { getTimetable } from '../services/api';
 
 const PERIOD_TIMES = {
-  1: { start: '08:45', end: '09:40', label: '08:45 - 09:40 AM' },
-  2: { start: '09:40', end: '10:35', label: '09:40 - 10:35 AM' },
-  3: { start: '10:50', end: '11:45', label: '10:50 - 11:45 AM' },
-  4: { start: '11:45', end: '12:40', label: '11:45 AM - 12:40 PM' },
-  5: { start: '01:40', end: '02:35', label: '01:40 - 02:35 PM' },
-  6: { start: '02:35', end: '03:30', label: '02:35 - 03:30 PM' },
-  7: { start: '03:30', end: '04:25', label: '03:30 - 04:25 PM' }
+  1: { start: '09:00', end: '09:55', label: '09:00 - 09:55 AM' },
+  2: { start: '09:55', end: '10:50', label: '09:55 - 10:50 AM' },
+  3: { start: '11:05', end: '12:00', label: '11:05 AM - 12:00 PM' },
+  4: { start: '12:00', end: '12:55', label: '12:00 - 12:55 PM' },
+  5: { start: '14:00', end: '14:55', label: '02:00 - 02:55 PM' },
+  6: { start: '14:55', end: '15:50', label: '02:55 - 03:50 PM' },
+  7: { start: '15:50', end: '16:45', label: '03:50 - 04:45 PM' }
 };
 
 export default function Timetable({ attendanceMap, customToken }) {
@@ -89,13 +89,13 @@ export default function Timetable({ attendanceMap, customToken }) {
     const mins = now.getMinutes();
     const currentTimeVal = hours * 60 + mins;
 
-    if (currentTimeVal >= 525 && currentTimeVal < 580) return 1;
-    if (currentTimeVal >= 580 && currentTimeVal < 635) return 2;
-    if (currentTimeVal >= 650 && currentTimeVal < 705) return 3;
-    if (currentTimeVal >= 705 && currentTimeVal < 760) return 4;
-    if (currentTimeVal >= 820 && currentTimeVal < 875) return 5;
-    if (currentTimeVal >= 875 && currentTimeVal < 930) return 6;
-    if (currentTimeVal >= 930 && currentTimeVal < 985) return 7;
+    if (currentTimeVal >= 540 && currentTimeVal < 595) return 1;
+    if (currentTimeVal >= 595 && currentTimeVal < 650) return 2;
+    if (currentTimeVal >= 665 && currentTimeVal < 720) return 3;
+    if (currentTimeVal >= 720 && currentTimeVal < 775) return 4;
+    if (currentTimeVal >= 840 && currentTimeVal < 895) return 5;
+    if (currentTimeVal >= 895 && currentTimeVal < 950) return 6;
+    if (currentTimeVal >= 950 && currentTimeVal < 1005) return 7;
 
     return null;
   };
